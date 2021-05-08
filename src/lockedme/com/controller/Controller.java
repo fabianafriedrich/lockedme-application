@@ -15,20 +15,23 @@ public class Controller {
 
 	private void readFile() {
 		// -----------------------
-		// Reading in the file
+		// Read the file
 		// -----------------------
 		try {
-
 			BufferedReader br = new BufferedReader(new FileReader(PATH));
 			while (br.ready()) {
-				User user = new User(br.readLine());
-				names.add(user);
+				names.add(new User(br.readLine()));
 			}
-
+			br.close();
 		} catch (IOException e) {
 			System.out.println("It was not possible read this file");
 			e.printStackTrace();
 		}
+	}
+	
+	//TODO sort method
+	private List<User> sortAsc(){
+		return null;
 	}
 
 	public List<User> listAll() {
