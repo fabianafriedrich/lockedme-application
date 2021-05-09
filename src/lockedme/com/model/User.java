@@ -1,6 +1,6 @@
 package lockedme.com.model;
 
-public class User {
+public class User implements Comparable<User> {
 	private String name;
 
 	public User() {
@@ -22,6 +22,11 @@ public class User {
 	@Override
 	public String toString() {
 		return name;
+	}
+
+	@Override
+	public int compareTo(User user) {
+		return this.getName().compareTo(user.getName());
 	}
 
 }
