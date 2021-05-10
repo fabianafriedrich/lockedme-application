@@ -69,7 +69,6 @@ public class Controller {
 			mid = (first + last) / 2;
 		}
 		if (first > last) {
-			System.out.println("User not found!");
 			return null;
 		}
 		return names.get(mid);
@@ -82,9 +81,12 @@ public class Controller {
 
 	public void addUser(User user) {
 		readFile();
-		
-		writeFile(user);
-		System.out.println(user.getName() + " was added to the file");
+		if(searchUsers(user.getName()) == null) {
+			writeFile(user);
+			System.out.println(user.getName() + " was added to the file");
+		}
+		System.out.println("\n");
+		System.out.println(user.getName() + " already exist");
 	}
 
 }

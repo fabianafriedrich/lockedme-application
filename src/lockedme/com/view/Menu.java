@@ -74,6 +74,7 @@ public class Menu {
 
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		String input = "";
+		String name = "";
 
 		try {
 
@@ -93,9 +94,16 @@ public class Menu {
 
 		// Check the user number
 		if (input.equals("1")) {
-			System.out.println("Please enter user name ");
+	
 			try {
-				ctr.addUser(new User(br.readLine()));
+				System.out.println("Please enter user name ");
+				name = br.readLine();
+	            String regex = "^[a-zA-Z_ ]*$";
+	            if (name.equals("")|| !name.matches(regex)) {
+	                System.err.println("Input can't be empty or contain numbers, try again");
+	                operationsMenu();
+	            }
+				ctr.addUser(new User(name));
 				menu();
 			} catch (IOException e) {
 				System.err.println("It was not possible to add the user, please try again");
@@ -105,7 +113,28 @@ public class Menu {
 		} else if (input.equals("2")) {
 
 		} else if (input.equals("3")) {
-			System.err.println(ctr.searchUsers("Ethan Shimmer").getName());
+			User user = new User();
+			try {
+				System.out.println("Please enter user name ");
+				name = br.readLine();
+	            String regex = "^[a-zA-Z_ ]*$";
+	            if (name.equals("")|| !name.matches(regex)) {
+	                System.err.println("Input can't be empty or contain numbers, try again");
+	                operationsMenu();
+	            }
+	            user = ctr.searchUsers(name);
+	            if(user == null) {
+	            	System.out.println("User not found!");
+	            }else {
+	            	System.out.println(user.getName() + " was found in file");	
+	            }
+	            menu();
+			} catch (IOException e) {
+				System.err.println("It was not possible to search this user, please try again");
+				e.printStackTrace();
+				operationsMenu();
+			}
+			
 		} else if (input.equals("4")) {
 			menu();
 		} else {
