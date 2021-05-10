@@ -99,7 +99,7 @@ public class Menu {
 				System.out.println("Please enter user name ");
 				name = br.readLine();
 	            String regex = "^[a-zA-Z_ ]*$";
-	            if (name.equals("")|| !name.matches(regex)) {
+	            if (name.equals("")|| !name.matches(regex) || name.trim().length() <= 0) {
 	                System.err.println("Input can't be empty or contain numbers, try again");
 	                operationsMenu();
 	            }
