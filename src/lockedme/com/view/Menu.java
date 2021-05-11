@@ -49,7 +49,7 @@ public class Menu {
 
 		// Check the user number
 		if (input.equals("1")) {
-			System.out.println(ctr.listAll());
+			ctr.listAll();
 			menu();
 
 		} else if (input.equals("2")) {
@@ -96,7 +96,7 @@ public class Menu {
 		if (input.equals("1")) {
 	
 			try {
-				System.out.println("Please enter user name ");
+				System.out.println("Please enter user name: ");
 				name = br.readLine();
 	            String regex = "^[a-zA-Z_ ]*$";
 	            if (name.equals("")|| !name.matches(regex) || name.trim().length() <= 0) {
@@ -111,11 +111,26 @@ public class Menu {
 				operationsMenu();
 			}
 		} else if (input.equals("2")) {
+			try {
+				System.out.println("Please enter user name you want to delete: ");
+				name = br.readLine();
+	            String regex = "^[a-zA-Z_ ]*$";
+	            if (name.equals("")|| !name.matches(regex) || name.trim().length() <= 0) {
+	                System.err.println("Input can't be empty or contain numbers, try again");
+	                operationsMenu();
+	            }
+				ctr.deleteUsers(name);
+				menu();
+			} catch (IOException e) {
+				System.err.println("It was not possible to add the user, please try again");
+				e.printStackTrace();
+				operationsMenu();
+			}
 
 		} else if (input.equals("3")) {
 			User user = new User();
 			try {
-				System.out.println("Please enter user name ");
+				System.out.println("Please enter user name: ");
 				name = br.readLine();
 	            String regex = "^[a-zA-Z_ ]*$";
 	            if (name.equals("")|| !name.matches(regex)) {

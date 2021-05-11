@@ -48,32 +48,37 @@ public class Controller {
 			e.printStackTrace();
 		}
 	}
-	
-	private void deleteUserOnFile(String name) {
+
+	private void overwriteFile() {
 		// -----------------------
 		// Delete user on the file
 		// -----------------------
-//		try {
-//			BufferedWriter bw = new BufferedWriter(new FileWriter(PATH, true));
-//			bw.newLine();
-//			bw.write(user.getName());
-//			bw.close();
-//		} catch (IOException e) {
-//			System.out.println("It was not possible write into this file");
-//			e.printStackTrace();
-//		}
+		try {
+			BufferedWriter bw = new BufferedWriter(new FileWriter(PATH));
+			for (int i = 0; i < names.size(); i++) {
+				bw.write(names.get(i).getName());
+				bw.newLine();
+			}
+			bw.close();
+		} catch (IOException e) {
+			System.out.println("It was not possible write into this file");
+			e.printStackTrace();
+		}
 	}
 
-	// Sorting using TreeSet Data Structure, the order of elements is maintained 
 	private void sortAsc() {
+		// -----------------------
+		// Sorting using TreeSet Data Structure, the order of elements is maintained
+		// -----------------------
 		Set<User> set = new TreeSet<User>(names);
 		names = new ArrayList<User>();
 		names.addAll(set);
 	}
 
-	// TODO improve search to be able to look for name or last name 
-	// binary search technique algorithm complexity  is O(log n) time O(1) space 
 	public User searchUsers(String name) {
+		// -----------------------
+		//  binary search technique algorithm complexity is O(log n) time O(1) space
+		// -----------------------
 		readFile();
 		sortAsc();
 		int first = 0;
@@ -92,27 +97,33 @@ public class Controller {
 		}
 		return names.get(mid);
 	}
-	
+
 	public void deleteUsers(String name) {
-		readFile();
-		if(searchUsers(name) == null) {
+		User userFound = searchUsers(name);
+		if (userFound == null) {
 			System.out.println(name + " not found");
+		} else {
+			names.remove(userFound);
+			overwriteFile();
+			System.out.println(name + " was deleted");
+
 		}
-		
+
 	}
 
-	public List<User> listAll() {
+	public void listAll() {
 		readFile();
 		sortAsc();
-		return names;
+		for (int i = 0; i < names.size(); i++) {
+			System.out.println(i + "." + names.get(i).getName());
+		}
 	}
 
 	public void addUser(User user) {
-		readFile();
-		if(searchUsers(user.getName()) != null) {
+		if (searchUsers(user.getName()) != null) {
 			System.out.println("\n");
 			System.out.println(user.getName() + " already exist");
-		}else {
+		} else {
 			writeFile(user);
 			System.out.println(user.getName() + " was added to the file");
 		}
