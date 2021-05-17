@@ -12,6 +12,7 @@ public class Menu {
 	Controller ctr = new Controller();
 
 	public Menu() {
+		welcome();
 		menu();
 	}
 
@@ -20,6 +21,12 @@ public class Menu {
 			return true;
 		} 
 		return false;
+	}
+	
+	public void welcome() {
+		System.out.println("Welcome");
+		System.out.println("This application was developed for Company Lockers Pvt. Ltd.");
+		System.out.println("The name of the application is LockedMe developed by Fabiana Friedrich");
 	}
 
 	// Get into menu

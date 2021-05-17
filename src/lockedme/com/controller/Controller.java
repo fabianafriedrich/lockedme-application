@@ -115,7 +115,7 @@ public class Controller {
 		readFile();
 		sortAsc();
 		for (int i = 0; i < names.size(); i++) {
-			System.out.println(i + "." + names.get(i).getName());
+			System.out.println(names.get(i).getName());
 		}
 	}
 
